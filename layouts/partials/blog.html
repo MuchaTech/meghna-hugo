@@ -1,4 +1,8 @@
-{{ if gt (where site.RegularPages "Section" "==" "blog") 0}}
+{{ $data := index site.Data site.Language.Lang }}
+
+{{ if gt (where site.RegularPages "Section" "==" "blog") 0 }}
+{{ if $data.blog.blog.enable }}
+{{ with $data.blog.blog }}
 {{"<!-- Start Blog Section -->" | safeHTML}}
 <section id="blog" class="section">
 	<div class="container">
@@ -24,4 +28,4 @@
 	</div>
 </section>
 {{"<!-- /blog -->" | safeHTML}}
-{{ end }}
+{{ end }} {{ end }} {{ end }}

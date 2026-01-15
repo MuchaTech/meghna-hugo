@@ -51,9 +51,11 @@
 						<textarea rows="6" placeholder="{{ .message }}" class="form-control" name="message" id="message"></textarea>
 					</div>
 					<div id="cf-submit">
-						<button type="submit" id="contact-submit" class="btn btn-transparent btn-block"
-							value="{{ .submit }}">{{ .submit }}</button>
+						<button type="submit" id="contact-submit" class="btn btn-outline-info btn-block"
+							value="{{ .submit }}">{{ .submit }}
+						</button>
 					</div>
+					<p id="my-form-status"></p> <!-- Add response message from the site to the client -->
 				</form>
 			</div>
 			{{ end }}
