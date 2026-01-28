@@ -34,12 +34,6 @@
             <li>{{ . }}</li>
             {{ end }}
           </ul>
-
-          {{if .enable }}
-          {{ with .button }}
-          <a class="btn btn-transparent" href="{{ .link | safeURL }}">{{ .label }}</a>
-          {{ end }}
-          {{ end }}
         </div>
       </div>
       {{"<!-- end single pricing table -->" | safeHTML}}
