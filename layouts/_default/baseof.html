@@ -27,7 +27,6 @@
           .then((response) => {
             if (response.ok) {
               status.innerHTML = "Thank you for contacting MuchaTech!";
-              status.att
               form.reset();
             } else {
               response.json().then((data) => {

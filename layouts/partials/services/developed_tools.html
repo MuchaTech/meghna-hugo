@@ -1,0 +1,25 @@
+{{ $data := index site.Data site.Language.Lang }}
+
+{{ if $data.developed_tools.developed_tools.enable }}
+{{ with $data.deveoped_tools.developed_tools }}
+{{"<!-- developed-tools service -->" | safeHTML}}
+<section class="section section-bg about-2 padding-0 mb-4" id="developed-tools">
+
+  <div class="container-fluid">
+      <div class="row" id="cybersecurity-tools">
+        {{range .cybersecurity }}
+        <div class="col-lg-3">
+          <div class="content-block">
+            <h2>{{ .name }}</h2>
+            {{"<!-- Add React Component for Tools -->" | safeHTML}}
+            <div class="row {{ .tag }}" id="tools">
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+  </div>
+</section>
+{{"<!-- /developed-tools service -->" | safeHTML}}
+{{ end }}
+{{ end }}

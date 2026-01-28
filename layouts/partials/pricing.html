@@ -10,7 +10,7 @@
       {{"<!-- section title -->" | safeHTML}}
       <div class="col-lg-12">
         <div class="title text-center wow fadeInDown" data-wow-duration="500ms">
-					<h2>{{ with .title }} {{ index (split . " ") 0 | safeHTML }} {{ end }}<span class="color">
+          <h2>{{ with .title }} {{ index (split . " ") 0 | safeHTML }} {{ end }}<span class="color">
             {{ with .title }} {{ after (len (index (split . " ") 0)) . | safeHTML }} {{ end }}</span></h2>
           <div class="border-meghna"></div>
         </div>
@@ -35,9 +35,10 @@
             {{ end }}
           </ul>
 
-          {{"<!-- signup button -->" | safeHTML}}
+          {{if .enable }}
           {{ with .button }}
           <a class="btn btn-transparent" href="{{ .link | safeURL }}">{{ .label }}</a>
+          {{ end }}
           {{ end }}
         </div>
       </div>
