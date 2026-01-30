@@ -1,50 +1,8 @@
 {{ $data := index site.Data site.Language.Lang }}
 
 {{ if $data.contact.contact.enable }}
-{{ with $data.contact.contact }}
-
-{{"<!-- Start Contact Us -->" | safeHTML}}
-<section id="contact" class="contact-us section-bg"> 
-
-  <div class="container pb-5">
-    <div class="row">
-      <div class="col-lg-12">
-        {{"<!-- section title -->" | safeHTML}}
-        <div class="title text-center wow fadeIn" data-wow-duration="500ms">
-          <h2>{{ with .title }} {{ index (split . " ") 0 | safeHTML }} {{ end }}<span class="color">
-              {{ with .title }} {{ after (len (index (split . " ") 0)) . | safeHTML }} {{ end }}</span></h2>
-          <div class="border-meghna"></div>
-        </div>
-      </div>
-      {{"<!-- /section title -->" | safeHTML}}
-
-      {{"<!-- Contact Details -->" | safeHTML}}
-      <div class="contact-info col-lg-6 wow fadeInUp" data-wow-duration="500ms">
-        <h3>{{ .subtitle | markdownify }}</h3>
-        <p> {{ .content | markdownify }} </p>
-
-        {{ if .contact_form.enable }}
-        <div class="contact-details">
-          {{ range .contact_list }}
-          <div class="con-info clearfix">
-            <i class="{{ .icon }}"></i>
-            <span>{{ .info }}</span>
-          </div>
-          {{ end }}
-        </div>
-        {{ end }}
-      </div>
-      {{"<!-- /Contact details -->" | safeHTML}}
-
-
-      {{"<!-- Contact Spree Form -->" | safeHTML}}
-      {{ if .contact_spree_form.enable }}
-      {{ with .contact_spree_form }}
-      <div class="col-lg-6 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-        <!-- Add response message from the site to the client TODO: Maybe add react component here -->
-        <div id="form-response" class="form-response-cls">
-          <p class="form-status"></p>
-        </div>
+{{ with .contact_form }}
+<div class="col-lg-6 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
         <form
           action="{{ .form_action }}"
           class="fs-form fs-layout__2-column"
@@ -96,7 +54,7 @@
           </div>
           <div class="fs-field">
             <label class="fs-label" for="phone-number">Phone Number</label>
-            <input class="fs-input" id="phone-number" name="phone-number" placeholder="{{ .number }}" autocomplete="on" required />
+            <input class="fs-input" id="phone-number" name="phone-number" placeholder="{{ .phone }}" autocomplete="on" required />
           </div>
           <div class="fs-field col-span-full">
             <label class="fs-label" for="message">Your Message</label>
@@ -122,7 +80,7 @@
               <label class="fs-label" for="dpa-consent-description">
                 Declaration of consent for data processing
               </label>
-              {{with .content_email }}
+              {{with .consent_email }}
               <p class="fs-description" id="dpa-consent-description">
                 You agree that your data from the form will be collected and processed
                 to answer your request. You can revoke your consent at any time for the
@@ -135,24 +93,14 @@
           <div class="fs-button-group">
             <button class="fs-button btn btn-outline-info btn-block" type="submit" >{{ .submit }}</button>
           </div>
+                <!-- Add response message from the site to the client -->
+          <div id="form-response" class="alert show" role="alert">
+      <!--<strong id="warning-smg"></strong>
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+              <span id="closing-icon" aria-hidden="true"></span>
+        </button> -->
+          </div>
         </form>
-      </div>
-      {{ end }}
-      {{ else }}
-      
-      <div class="contact-details">
-        {{ range .contact_list }}
-        <div class="con-info clearfix">
-          <i class="{{ .icon }}"></i>
-          <span>{{ .info }}</span>
-        </div>
-        {{ end }}
-      </div>
-      {{ end }}
-    </div>
-  </div>
-
-</section>
-{{"<!-- /contact spree form -->" | safeHTML}}
+</div>
 {{ end }}
 {{ end }}

@@ -6,8 +6,8 @@
 <section id="contact" class="contact-us section-bg">
 	<div class="container pb-5">
 		<div class="row">
+			{{"<!-- section title -->" | safeHTML}}
 			<div class="col-lg-12">
-				{{"<!-- section title -->" | safeHTML}}
 				<div class="title text-center wow fadeIn" data-wow-duration="500ms">
 					<h2>{{ with .title }} {{ index (split . " ") 0 | safeHTML }} {{ end }}<span class="color">
 							{{ with .title }} {{ after (len (index (split . " ") 0)) . | safeHTML }} {{ end }}</span></h2>
@@ -21,7 +21,6 @@
 				<h3>{{ .subtitle | markdownify }}</h3>
 				<p> {{ .content | markdownify }} </p>
 
-				{{ if .contact_form.enable }}
 				<div class="contact-details">
 					{{ range .contact_list }}
 					<div class="con-info clearfix">
@@ -29,9 +28,17 @@
 						<span>{{ .info }}</span>
 					</div>
 					{{ end }}
+													<!-- Add response message from the site to the client -->
+		        <div id="form-response" class="alert show" role="alert">
+
+				<!--<strong id="warning-smg"></strong>
+		        	<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+		        		<span id="closing-icon" aria-hidden="true"></span>
+	 				</button> -->
+		        </div>
 				</div>
-				{{ end }}
 			</div>
+			{{"<!-- /Contact Details -->" | safeHTML}}
 
 			{{"<!-- Contact Form -->" | safeHTML}}
 			{{ if .contact_form.enable }}
@@ -39,42 +46,79 @@
 			<div class="col-lg-6 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
 				<form id="contact-form" class="form-meghna" method="post" action="{{ .form_action }}" role="form">
 					<div class="form-group">
+			            <label class="fs-label" for="business-area">Business Area</label>
+			            <select class="fs-select" id="business-area" name="business-area" required>
+			              <option value="Cybersecurity">Cybersecurity</option>
+			              <option value="Automation Tools">Automation Tools</option>
+			              <option value="Cybersecurity R&D">Research & Development</option>
+			            </select>
+			        </div>
+			        <div class="form-group">
+			            <label class="fs-label" for="request-type">Type of Request</label>
+			            <select class="fs-select" id="request-type" name="request-type" required>
+			              <option value="Product-inquiry">Plans Inquiry</option>
+			              <option value="Purchase-request">Purchase Request</option>
+			              <option value="General-inquiry">General Inquiry</option>
+			            </select>
+			        </div>
+					<div class="form-group">
 						<input type="text" placeholder="{{ .name }}" class="form-control" name="name" id="name" autocomplete="on" required>
 					</div>
 					<div class="form-group">
-						<input type="email" placeholder="{{ .email }}" class="form-control" name="email" id="email" autocomplete="on" required>
+						<input type="email" placeholder="{{ .email }}" class="form-control" name="email" id="email" autocomplete="on" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="characters@characters.domain" required>
 					</div>
 					<div class="form-group">
-						<input type="text" placeholder="{{ .subject }}" class="form-control" name="subject" id="subject" required>
-					</div>
+						<input type="text" placeholder="{{ .phone }}" class="form-control" name="phone-number" id="phone-number" required>
+					</div>				
 					<div class="form-group">
 						<textarea rows="6" placeholder="{{ .message }}" class="form-control" name="message" id="message"></textarea>
 					</div>
+					<div class="form-group">
+				        <div class="fs-checkbox-field col-span-full">
+				            <div class="fs-checkbox-wrapper">
+				              <input
+				                aria-describedby="dpa-consent-description"
+				                class="fs-checkbox"
+				                id="dpa-consent-description"
+				                name="dpa-consent"
+				                required
+				                type="checkbox"
+				                value="consent"
+				              />
+				            </div>
+				            <div>
+				              <label class="fs-label" for="dpa-consent-description">
+				                Declaration of consent for data processing
+				              </label>
+				              {{with .consent_email }}
+				              <p class="fs-description" id="dpa-consent-description">
+				                You agree that your data from the form will be collected and processed
+				                to answer your request. You can revoke your consent at any time for the
+				                future by e-mail to {{ . }}. Detailed information on the
+				                handling of user data can be found in our data protection declaration.
+				              </p>
+				              {{ end }}
+				            </div>
+				        </div>
+			        </div>
 					<div id="cf-submit">
 						<button type="submit" id="contact-submit" class="btn btn-outline-info btn-block"
 							value="{{ .submit }}">{{ .submit }}
 						</button>
 					</div>
 					<!-- Add response message from the site to the client TODO: Maybe add react component here -->
-					<p id="my-form-status"></p> 
+					<p id="my-form-status"></p>
 				</form>
 			</div>
-
-			<!-- {{ partial "contact_spree.html" . }} -->
-			
 			{{ end }}
+			{{"<!-- /Contact Form -->" | safeHTML}}
+
 			{{ else }}
-			
-			<div class="contact-details">
-				{{ range .contact_list }}
-				<div class="con-info clearfix">
-					<i class="{{ .icon }}"></i>
-					<span>{{ .info }}</span>
-				</div>
-				{{ end }}
-			</div>
+			{{"<!-- Contact Spree Form -->" | safeHTML}}
+			{{ partial "contact_spree.html" . }}
 			{{ end }}
 		</div>
+
 	</div>
 </section>
 {{"<!-- /contact -->" | safeHTML}}
