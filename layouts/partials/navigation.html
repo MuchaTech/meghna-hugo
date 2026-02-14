@@ -4,16 +4,16 @@
       <a class="navbar-brand p-0" href="{{ .Site.BaseURL | relLangURL }}">
         {{ if site.Params.logo }}
         <!---{{ partial "image.html" (dict "Src" site.Params.logo "Alt" .Site.Title "Class" "lozad") }}-->
-		<img class="lozad" data-src="{{ site.Params.logo | absURL }}" alt="{{ .Site.Title }}" height="52">
+      <img class="lozad" data-src="{{ site.Params.logo | absURL }}" alt="{{ .Site.Title }}" height="52">
         {{ else }} {{ site.Title }} {{ end }}
       </a>
       <button
         class="navbar-toggler rounded-0"
         type="button"
-        data-toggle="collapse"
-        data-target="#navigation"
+        data-bs-toggle="collapse"
+        data-bs-target="#navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navigation">
