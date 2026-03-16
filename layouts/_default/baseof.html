@@ -9,6 +9,8 @@
     {{ partial "preloader.html" . }}
     {{- block "main" . }}
     {{- end }}
+    <!-- Add react components -->
+    <div id="react-root"></div>
   </div>
   
   {{- partial "footer.html" . -}}
@@ -54,6 +56,9 @@
       form.addEventListener("submit", handleSubmit);
 
     </script>
+
+    {{ $js := resources.Get "js/App.jsx" | js.Build (dict "target" "es2017" "minify" true) }}
+    <script src="{{ $js.RelPermalink }}" defer></script>
 
 </body>
 
